@@ -1,0 +1,9 @@
+name: Sylphian-Enchantment
+version: '1.0.0'
+main: net.sylphian.sylphianEnchantment.SylphianEnchantment
+bootstrapper: net.sylphian.sylphianEnchantment.SylphianEnchantmentBootstrap
+
+api-version: '1.21'
+load: STARTUP
+authors: [ QuackieMackie ]
+description: Contains all of Sylphian enchantments.
