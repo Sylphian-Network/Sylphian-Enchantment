@@ -1,4 +1,4 @@
-package net.sylphian.sylphianEnchantment.listeners;
+package net.sylphian.sylphianEnchantment.listeners.armor;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;

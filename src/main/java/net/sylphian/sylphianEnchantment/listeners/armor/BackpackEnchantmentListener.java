@@ -1,7 +1,8 @@
-package net.sylphian.sylphianEnchantment.listeners;
+package net.sylphian.sylphianEnchantment.listeners.armor;
 
 import net.kyori.adventure.text.Component;
 import net.sylphian.sylphianEnchantment.SylphianEnchantment;
+import net.sylphian.sylphianEnchantment.utils.EnchantmentUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.configuration.ConfigurationSection;
@@ -71,8 +73,7 @@ public class BackpackEnchantmentListener implements Listener {
         Player player = event.getPlayer();
         UUID playerId = player.getUniqueId();
 
-        ItemStack chestplate = player.getInventory().getChestplate();
-        if (chestplate == null || chestplate.getEnchantmentLevel(backpackEnchantment) <= 0) return;
+        if (!EnchantmentUtils.hasEnchantment(player, EquipmentSlot.CHEST, backpackEnchantment)) return;
 
         if (!event.isSneaking()) return;
 

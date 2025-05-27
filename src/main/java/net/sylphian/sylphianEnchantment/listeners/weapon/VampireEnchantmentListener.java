@@ -1,4 +1,4 @@
-package net.sylphian.sylphianEnchantment.listeners;
+package net.sylphian.sylphianEnchantment.listeners.weapon;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;

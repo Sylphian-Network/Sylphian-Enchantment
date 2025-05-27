@@ -17,80 +17,113 @@ import org.bukkit.inventory.EquipmentSlotGroup;
 import java.util.Set;
 
 public class SylphianEnchantmentBootstrap implements PluginBootstrap {
+    
+    private static final Key BACKPACK_KEY = Key.key("sylphian:backpack");
+    private static final Key VAMPIRE_KEY = Key.key("sylphian:vampire");
+    private static final Key ESCAPE_ARTIST_KEY = Key.key("sylphian:escape_artist");
+    private static final Key REPLANT_KEY = Key.key("sylphian:replant");
+    private static final Key VITALITY_KEY = Key.key("sylphian:vitality");
+    private static final Key DEEP_CATCH_KEY = Key.key("sylphian:deep_catch");
+
     @Override
     public void bootstrap(BootstrapContext context) {
         LifecycleEventManager<BootstrapContext> lifecycle = context.getLifecycleManager();
 
-        // Enchantment builder reference:
-        // .description(Component.text("Name")) – sets the enchantment name shown in item tooltips
-        // .supportedItems(...) – defines which items can receive the enchantment
-        // .anvilCost(int) – extra cost (in levels) when combining with an anvil
-        // .maxLevel(int) – maximum level of the enchantment
-        // .weight(int) – how common the enchantment is in the enchanting table (higher = more common; vanilla ranges from 1 to 10+)
-        // .minimumCost(EnchantmentCost.of(base, perLevel)) – XP level needed at enchanting table for min cost
-        // .maximumCost(EnchantmentCost.of(base, perLevel)) – XP level needed at enchanting table for max cost
-        // .activeSlots(...) – which equipment slots this enchantment applies to (e.g., HAND, CHEST, etc.)
-
         lifecycle.registerEventHandler(
                 RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {
                     event.registry().register(
-                            EnchantmentKeys.create(Key.key("sylphian:backpack")),
+                            EnchantmentKeys.create(BACKPACK_KEY),
                             builder -> builder
                                     .description(Component.text("Backpack"))
                                     .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.CHEST_ARMOR))
                                     .anvilCost(1)
                                     .maxLevel(1)
-                                    .weight(5)
-                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(5, 2))
-                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(20, 10))
+                                    .weight(4)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(5, 0))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(12, 0))
                                     .activeSlots(EquipmentSlotGroup.CHEST)
                     );
 
                     event.registry().register(
-                            EnchantmentKeys.create(Key.key("sylphian:vampire")),
+                            EnchantmentKeys.create(VAMPIRE_KEY),
                             builder -> builder
                                     .description(Component.text("Vampire"))
                                     .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.ENCHANTABLE_WEAPON))
-                                    .anvilCost(1)
+                                    .anvilCost(3)
                                     .maxLevel(5)
-                                    .weight(5)
-                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(5, 5))
-                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(10, 5))
+                                    .weight(3)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(10, 8))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(25, 15))
                                     .activeSlots(EquipmentSlotGroup.HAND)
                     );
 
                     event.registry().register(
-                            EnchantmentKeys.create(Key.key("sylphian:escape_artist")),
+                            EnchantmentKeys.create(ESCAPE_ARTIST_KEY),
                             builder -> builder
                                     .description(Component.text("Escape Artist"))
                                     .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.LEG_ARMOR))
+                                    .anvilCost(2)
+                                    .maxLevel(3)
+                                    .weight(4)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(8, 6))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(18, 10))
+                                    .activeSlots(EquipmentSlotGroup.LEGS)
+                    );
+
+                    event.registry().register(
+                            EnchantmentKeys.create(REPLANT_KEY),
+                            builder -> builder
+                                    .description(Component.text("Replant"))
+                                    .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.HOES))
+                                    .anvilCost(1)
+                                    .maxLevel(1)
+                                    .weight(5)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(4, 0))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(8, 0))
+                                    .activeSlots(EquipmentSlotGroup.HAND)
+                    );
+
+                    event.registry().register(
+                            EnchantmentKeys.create(VITALITY_KEY),
+                            builder -> builder
+                                    .description(Component.text("Vitality"))
+                                    .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.ENCHANTABLE_ARMOR))
+                                    .anvilCost(3)
+                                    .maxLevel(1)
+                                    .weight(1)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(15, 0))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(30, 0))
+                                    .activeSlots(EquipmentSlotGroup.ARMOR)
+                    );
+
+                    event.registry().register(
+                            EnchantmentKeys.create(DEEP_CATCH_KEY),
+                            builder -> builder
+                                    .description(Component.text("Deep Catch"))
+                                    .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.ENCHANTABLE_FISHING))
                                     .anvilCost(1)
                                     .maxLevel(3)
-                                    .weight(5)
-                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(5, 5))
-                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(10, 5))
-                                    .activeSlots(EquipmentSlotGroup.LEGS)
+                                    .weight(2)
+                                    .minimumCost(EnchantmentRegistryEntry.EnchantmentCost.of(6, 4))
+                                    .maximumCost(EnchantmentRegistryEntry.EnchantmentCost.of(16, 10))
+                                    .activeSlots(EquipmentSlotGroup.HAND)
                     );
                 })
         );
 
         lifecycle.registerEventHandler(
-                LifecycleEvents.TAGS.postFlatten(RegistryKey.ENCHANTMENT).newHandler(event -> {
-                    event.registrar().addToTag(
-                            EnchantmentTagKeys.IN_ENCHANTING_TABLE,
-                            Set.of(EnchantmentKeys.create(Key.key("sylphian:backpack")))
-                    );
-
-                    event.registrar().addToTag(
-                            EnchantmentTagKeys.IN_ENCHANTING_TABLE,
-                            Set.of(EnchantmentKeys.create(Key.key("sylphian:vampire")))
-                    );
-
-                    event.registrar().addToTag(
-                            EnchantmentTagKeys.IN_ENCHANTING_TABLE,
-                            Set.of(EnchantmentKeys.create(Key.key("sylphian:escape_artist")))
-                    );
-                })
+                LifecycleEvents.TAGS.postFlatten(RegistryKey.ENCHANTMENT).newHandler(event ->
+                        event.registrar().addToTag(
+                        EnchantmentTagKeys.IN_ENCHANTING_TABLE,
+                        Set.of(
+                                EnchantmentKeys.create(BACKPACK_KEY),
+                                EnchantmentKeys.create(VAMPIRE_KEY),
+                                EnchantmentKeys.create(ESCAPE_ARTIST_KEY),
+                                EnchantmentKeys.create(REPLANT_KEY),
+                                EnchantmentKeys.create(VITALITY_KEY),
+                                EnchantmentKeys.create(DEEP_CATCH_KEY)
+                        )
+                ))
         );
     }
 }
