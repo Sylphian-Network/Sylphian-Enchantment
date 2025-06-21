@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "net.sylphian"
-version = "1.0.0"
+version = "1.21.6"
 
 repositories {
     mavenCentral()
@@ -19,10 +19,9 @@ repositories {
 }
 
 dependencies {
-    paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.21.4-R0.1-SNAPSHOT")
+    paperweightDevelopmentBundle("io.papermc.paper:dev-bundle:1.21.6-R0.1-SNAPSHOT")
 
-    compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly("net.sylphian:Sylphian-Library:1.0.0")
+    compileOnly("io.papermc.paper:paper-api:1.21.6-R0.1-SNAPSHOT")
 }
 
 tasks {
